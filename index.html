@@ -740,7 +740,7 @@ body.env-open { overflow:hidden; }
 
 <!-- ======================== HERO ======================== -->
 <section id="hero">
-  <video id="hero-video" src="video.mp4" autoplay muted loop playsinline></video>
+  <video id="hero-video" src="video.mp4" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture></video>
   <div id="hero-overlay"></div>
   <div class="sparkle-float" style="top:12%;left:7%;animation-delay:0s">✦</div>
   <div class="sparkle-float" style="top:20%;right:9%;animation-delay:1.6s">🕊</div>
@@ -1040,6 +1040,11 @@ function openEnvelope(){
   const box = document.getElementById('envBox');
   if(box.classList.contains('open')) return;
   box.classList.add('open');
+  const heroVideo = document.getElementById('hero-video');
+  if(heroVideo){
+    heroVideo.muted = true;
+    heroVideo.play().catch(()=>{});
+  }
   setTimeout(function(){
     var scene = document.getElementById('envScene');
     scene.style.transition = 'opacity .4s ease';
@@ -1057,6 +1062,11 @@ function cerrarSobre(){
   document.body.classList.remove('env-open');
   setTimeout(function(){ ov.remove(); }, 750);
   if(!playing) toggleMusic();
+  const heroVideo = document.getElementById('hero-video');
+  if(heroVideo){
+    heroVideo.muted = true;
+    heroVideo.play().catch(()=>{});
+  }
 }
 
 /* ---- COUNTDOWN ---- */
